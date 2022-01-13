@@ -2,12 +2,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 const defaultMeta = {
-  title: 'Next.js TypeScript Starter',
-  siteName: process.env.NEXT_PUBLIC_HOSTNAME || 'lordronz.github.io',
-  description: 'NextJS Typescript Boilerplate.',
+  title: 'Tell me something, anon',
+  siteName: process.env.NEXT_PUBLIC_HOSTNAME || 'lr-anon.vercel.app',
+  description: 'A place where you can send me a message anonymously.',
   url: process.env.NEXT_PUBLIC_HOSTNAME
     ? `https://${process.env.NEXT_PUBLIC_HOSTNAME}`
-    : 'https://lordronz.github.io',
+    : 'https://lr-anon.vercel.app',
   image: '/vercel.svg',
   type: 'website',
   robots: 'follow, index',

@@ -1,49 +1,44 @@
 /* eslint-disable @next/next/no-img-element */
+import axios from 'axios';
 import type { NextPage } from 'next';
+import React from 'react';
 
-import ArrowLink from '@/components/links/ArrowLink';
-import ButtonLink from '@/components/links/ButtonLink';
-import CustomLink from '@/components/links/CustomLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
+import Button from '@/components/buttons/Button';
 import Seo from '@/components/Seo';
 
 const Home: NextPage = () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    await axios.post('/api/submit', {
+      message: e.currentTarget.value,
+    });
+  };
+
   return (
     <>
       <Seo />
       <main>
         <section className='bg-black text-primary-50'>
           <div className='layout flex flex-col justify-center items-center min-h-screen text-center'>
-            <h1>Next.js + Tailwind CSS + TypeScript Starter</h1>
-            <p className='mt-2 text-sm text-primary-50'>
-              This starter is heavily inspired by{' '}
-              <CustomLink href='https://github.com/theodorusclarence/ts-nextjs-tailwind-starter'>
-                this amazing starter
-              </CustomLink>
-              . I changed some stuff to fit my preference.
+            <h1 className='mb-4'>Tell me something, anon !</h1>
+            <p className='mb-2'>
+              No need to worry, this is completely anonymous
             </p>
-            <p className='mt-2 text-md text-primary-50'>
-              <ArrowLink href='https://github.com/LordRonz/nextjs-starter'>
-                See the repository
-              </ArrowLink>
-            </p>
-
-            <ButtonLink className='mt-6' href='/components' variant='primary'>
-              Components
-            </ButtonLink>
-
-            <UnstyledLink
-              href='https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FLordRonz%2Fnextjs-starter'
-              className='mt-4'
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                width='92'
-                height='32'
-                src='https://vercel.com/button'
-                alt='Deploy with Vercel'
+            <form onSubmit={handleSubmit}>
+              <textarea
+                className='placeholder:text-primary-100 p-2 border-2 rounded-lg border-primary-300 bg-gray-900'
+                id='msg'
+                name='msg'
+                rows={5}
+                cols={35}
+                placeholder='Type here...'
+                aria-label='message'
               />
-            </UnstyledLink>
+              <div className='mt-2'>
+                <Button type='submit'>Submit</Button>
+              </div>
+            </form>
 
             <footer className='absolute bottom-2'>
               © Aaron Christopher {new Date().getFullYear()}
@@ -51,6 +46,11 @@ const Home: NextPage = () => {
           </div>
         </section>
       </main>
+      <style jsx>{`
+        textarea {
+          resize: none;
+        }
+      `}</style>
     </>
   );
 };
