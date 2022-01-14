@@ -16,9 +16,14 @@ const Home: NextPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axios.post('/api/submit', {
-      message: msg,
-    });
+    try {
+      const res = await axios.post('/api/submit', {
+        message: msg,
+      });
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
