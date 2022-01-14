@@ -1,17 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 import axios from 'axios';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Button from '@/components/buttons/Button';
 import Seo from '@/components/Seo';
 
 const Home: NextPage = () => {
+  const [msg, setMsg] = useState<string>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    setMsg(e.target.value);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     await axios.post('/api/submit', {
-      message: e.currentTarget.value,
+      message: msg,
     });
   };
 
@@ -34,6 +40,8 @@ const Home: NextPage = () => {
                 cols={35}
                 placeholder='Type here...'
                 aria-label='message'
+                value={msg}
+                onChange={handleChange}
               />
               <div className='mt-2'>
                 <Button type='submit'>Submit</Button>
