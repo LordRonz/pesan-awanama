@@ -12,13 +12,11 @@ const submit = async (
 ) => {
   const { message }: Message = req.body;
   if (!message || message.length > 169) {
-    res
-      .status(httpStatus.BAD_REQUEST)
-      .json({
-        status: httpStatus.BAD_REQUEST,
-        message:
-          'The message must have at least 1 characters, and no longer than 169 characters',
-      });
+    res.status(httpStatus.BAD_REQUEST).json({
+      status: httpStatus.BAD_REQUEST,
+      message:
+        'The message must have at least 1 characters, and no longer than 169 characters',
+    });
     return;
   }
   const result = await createMessage(req.body);

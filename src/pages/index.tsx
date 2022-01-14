@@ -2,9 +2,14 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
 import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
 import Seo from '@/components/Seo';
+
+const toastStyle = {
+  style: { background: '#333', color: '#eee' },
+};
 
 const Home: NextPage = () => {
   const [msg, setMsg] = useState<string>('');
@@ -17,12 +22,24 @@ const Home: NextPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/submit', {
-        message: msg,
-      });
-      console.log(res);
+      const res = await axios.post(
+        '/api/submit',
+        {
+          message: msg,
+        },
+        {
+          validateStatus: (status) => status !== 500,
+        }
+      );
+      if (res.status === 200) {
+        toast.success('Message sent !', toastStyle);
+      } else {
+        toast.error(res.data.message, toastStyle);
+      }
     } catch (e) {
-      console.log(e);
+      if (axios.isAxiosError(e)) {
+        return toast.error(e.message, toastStyle);
+      }
     }
   };
 
@@ -47,6 +64,7 @@ const Home: NextPage = () => {
                 aria-label='message'
                 value={msg}
                 onChange={handleChange}
+                required
               />
               <div className='mt-2'>
                 <Button type='submit'>Submit</Button>
@@ -59,6 +77,7 @@ const Home: NextPage = () => {
           </div>
         </section>
       </main>
+      <Toaster />
       <style jsx>{`
         textarea {
           resize: none;
