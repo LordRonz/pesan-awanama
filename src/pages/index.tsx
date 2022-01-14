@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import axios from 'axios';
 import type { NextPage } from 'next';
 import React, { useState } from 'react';
@@ -40,6 +39,7 @@ const Home: NextPage = () => {
       if (axios.isAxiosError(e)) {
         return toast.error(e.message, toastStyle);
       }
+      toast.error('Failed to send message', toastStyle);
     }
   };
 

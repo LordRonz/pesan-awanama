@@ -8,14 +8,9 @@ const faunaClient = new faunadb.Client({
 });
 
 export const createMessage = async (body: Message) => {
-  let data = { message: '' };
-  try {
-    data = await faunaClient.query<Message>(
-      q.Create(q.Collection('messages'), { data: body })
-    );
-  } catch (e) {
-    console.error(e);
-  }
+  const data = await faunaClient.query<Message>(
+    q.Create(q.Collection('messages'), { data: body })
+  );
 
   return data;
 };
