@@ -6,9 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import Button from '@/components/buttons/Button';
 import Seo from '@/components/Seo';
 
-const toastStyle = {
-  style: { background: '#333', color: '#eee' },
-};
+const toastStyle = { background: '#333', color: '#eee' };
 
 const Home: NextPage = () => {
   const [msg, setMsg] = useState<string>('');
@@ -20,27 +18,22 @@ const Home: NextPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const res = await axios.post(
-        '/api/submit',
-        {
-          message: msg,
+
+    toast.promise(
+      axios.post('/api/submit', {
+        message: msg,
+      }),
+      {
+        loading: 'Loading...',
+        success: 'Message sent !',
+        error: (e) => {
+          if (axios.isAxiosError(e)) {
+            return e.response?.data.message ?? e.message;
+          }
+          return 'Failed to send message';
         },
-        {
-          validateStatus: (status) => status !== 500,
-        }
-      );
-      if (res.status === 200) {
-        toast.success('Message sent !', toastStyle);
-      } else {
-        toast.error(res.data.message, toastStyle);
       }
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        return toast.error(e.message, toastStyle);
-      }
-      toast.error('Failed to send message', toastStyle);
-    }
+    );
   };
 
   return (
@@ -77,7 +70,17 @@ const Home: NextPage = () => {
           </div>
         </section>
       </main>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: toastStyle,
+          loading: {
+            iconTheme: {
+              primary: '#eb2754',
+              secondary: 'black',
+            },
+          },
+        }}
+      />
       <style jsx>{`
         textarea {
           resize: none;
