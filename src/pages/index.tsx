@@ -1,18 +1,46 @@
-/* eslint-disable @next/next/no-img-element */
 import axios from 'axios';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
 import Seo from '@/components/Seo';
 
+const toastStyle = {
+  style: { background: '#333', color: '#eee' },
+};
+
 const Home: NextPage = () => {
+  const [msg, setMsg] = useState<string>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    setMsg(e.target.value);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    await axios.post('/api/submit', {
-      message: e.currentTarget.value,
-    });
+    try {
+      const res = await axios.post(
+        '/api/submit',
+        {
+          message: msg,
+        },
+        {
+          validateStatus: (status) => status !== 500,
+        }
+      );
+      if (res.status === 200) {
+        toast.success('Message sent !', toastStyle);
+      } else {
+        toast.error(res.data.message, toastStyle);
+      }
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        return toast.error(e.message, toastStyle);
+      }
+      toast.error('Failed to send message', toastStyle);
+    }
   };
 
   return (
@@ -34,6 +62,9 @@ const Home: NextPage = () => {
                 cols={35}
                 placeholder='Type here...'
                 aria-label='message'
+                value={msg}
+                onChange={handleChange}
+                required
               />
               <div className='mt-2'>
                 <Button type='submit'>Submit</Button>
@@ -46,6 +77,7 @@ const Home: NextPage = () => {
           </div>
         </section>
       </main>
+      <Toaster />
       <style jsx>{`
         textarea {
           resize: none;
