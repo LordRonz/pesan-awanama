@@ -3,10 +3,13 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { getUser } from '@/lib/fauna';
+
 declare module 'iron-session' {
   interface IronSessionData {
     user?: {
       id: number;
+      name: string;
       admin?: boolean;
     };
   }
@@ -15,16 +18,20 @@ declare module 'iron-session' {
 export default withIronSessionApiRoute(
   async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     // get user from database then:
+
+    const data = await getUser(req.body);
+
     req.session.user = {
-      id: 230,
-      admin: true,
+      id: data.ts,
+      name: data.data.name,
+      admin: data.data.name === 'lordronz',
     };
     await req.session.save();
     res.send({ ok: true });
   },
   {
-    cookieName: 'myapp_cookiename',
-    password: 'complex_password_at_least_32_characters_long',
+    cookieName: 'anjay_kue',
+    password: process.env.COOKIE_PASS as string,
     // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
     cookieOptions: {
       secure: process.env.NODE_ENV === 'production',
