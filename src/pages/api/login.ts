@@ -15,6 +15,12 @@ declare module 'iron-session' {
   }
 }
 
+export type UserSession = {
+  id: number;
+  name: string;
+  admin?: boolean;
+};
+
 export default withIronSessionApiRoute(
   async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     // get user from database then:
