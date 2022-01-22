@@ -16,14 +16,9 @@ export const createMessage = async (body: Message) => {
 };
 
 export const getUser = async (body: User) => {
-  const { name, password } = body;
+  const { name } = body;
   const data = await faunaClient.query<UserRes>(
-    q.Get(
-      q.Intersection(
-        q.Match(q.Index('get_user_by_name'), name),
-        q.Match(q.Index('get_user_by_password'), password)
-      )
-    )
+    q.Get(q.Match(q.Index('get_user_by_name'), name))
   );
 
   return data;

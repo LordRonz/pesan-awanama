@@ -1,5 +1,7 @@
 // pages/api/login.ts
 
+import { compare } from 'bcrypt';
+import httpStatus from 'http-status';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -27,10 +29,17 @@ export default withIronSessionApiRoute(
 
     const data = await getUser(req.body);
 
+    if (!data || !(await compare(req.body.password, data.data.password))) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        status: httpStatus.BAD_REQUEST,
+        message: 'Name or password are invalid',
+      });
+    }
+
     req.session.user = {
       id: data.ts,
       name: data.data.name,
-      admin: data.data.name === 'lordronz',
+      admin: data.data.admin,
     };
     await req.session.save();
     res.send({ ok: true });
