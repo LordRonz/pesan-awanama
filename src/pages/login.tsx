@@ -1,11 +1,14 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
 import ArrowLink from '@/components/links/ArrowLink';
 import Seo from '@/components/Seo';
+
+import shouko from '../../public/images/nishimiya_shouko.jpg';
 
 const toastStyle = { background: '#333', color: '#eee' };
 
@@ -46,12 +49,19 @@ const Login: NextPage = () => {
 
   return (
     <>
-      <Seo templateTitle='Not Found' />
+      <Seo templateTitle='Login' />
       <main>
         <section className='bg-black text-primary-50'>
-          <div className='layout flex flex-col justify-center items-center min-h-screen text-center gap-y-20'>
-            <h1 className='text-4xl text-primary-300'>Login</h1>
-
+          <div className='layout flex flex-col justify-center items-center min-h-screen text-center gap-y-12'>
+            <div>
+              <h1 className='text-4xl text-primary-300 mb-4'>Login</h1>
+              <Image
+                src={shouko}
+                alt='Shouko Nishimiya'
+                width={100}
+                height={100}
+              />
+            </div>
             <form onSubmit={handleSubmit}>
               <label htmlFor='name'>Name</label>
               <input

@@ -14,7 +14,7 @@ type OwnerPageProp = {
 
 const Owner: NextPage<OwnerPageProp> = ({ user }) => (
   <>
-    <Seo templateTitle='Not Found' />
+    <Seo templateTitle='Me lord' />
     <main>
       <section className='bg-black text-primary-50'>
         <div className='layout flex flex-col justify-center items-center min-h-screen text-center gap-y-40'>
