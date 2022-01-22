@@ -23,12 +23,12 @@ const Login: NextPage = () => {
       }),
       {
         loading: 'Loading...',
-        success: 'Message sent !',
+        success: 'Logged in !, guten morgen sir!',
         error: (e) => {
           if (axios.isAxiosError(e)) {
             return e.response?.data.message ?? e.message;
           }
-          return 'Failed to send message';
+          return 'Login failed, who tf are you';
         },
       }
     );
