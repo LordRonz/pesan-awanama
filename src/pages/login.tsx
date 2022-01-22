@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -15,6 +16,7 @@ const toastStyle = { background: '#333', color: '#eee' };
 const Login: NextPage = () => {
   const [name, setName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +28,10 @@ const Login: NextPage = () => {
       }),
       {
         loading: 'Loading...',
-        success: 'Logged in !, guten morgen sir!',
+        success: () => {
+          setTimeout(() => router.push('/owner'), 2000);
+          return 'Logged in !, guten morgen sir!';
+        },
         error: (e) => {
           if (axios.isAxiosError(e)) {
             return e.response?.data.message ?? e.message;
