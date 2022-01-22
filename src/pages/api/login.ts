@@ -24,7 +24,7 @@ export type UserSession = {
 };
 
 export default withIronSessionApiRoute(
-  async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
+  async (req: NextApiRequest, res: NextApiResponse) => {
     // get user from database then:
 
     const data = await getUser(req.body);

@@ -35,7 +35,7 @@ const Owner: NextPage<OwnerPageProp> = ({ user }) => (
 );
 
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
-  async function getServerSideProps({ req }) {
+  async ({ req }) => {
     const user = req.session.user;
 
     if (!user || user?.admin !== true) {
