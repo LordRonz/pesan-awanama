@@ -11,17 +11,26 @@ const submit = async (
   res: NextApiResponse<Message | ErrorResponse | undefined>
 ) => {
   const { message }: Message = req.body;
-  if (!message || message.length > 169) {
-    res.status(httpStatus.BAD_REQUEST).json({
-      status: httpStatus.BAD_REQUEST,
-      message:
-        'The message must have at least 1 characters, and no longer than 169 characters',
-    });
-    return;
+  const { method } = req;
+  switch (method) {
+    case 'POST': {
+      if (!message || message.length > 169) {
+        res.status(httpStatus.BAD_REQUEST).json({
+          status: httpStatus.BAD_REQUEST,
+          message:
+            'The message must have at least 1 characters, and no longer than 169 characters',
+        });
+        return;
+      }
+      req.body.message = message.trim();
+      const result = await createMessage(req.body);
+      res.status(httpStatus.OK).json(result);
+      break;
+    }
+    default:
+      res.setHeader('Allow', ['POST']);
+      res.status(405).end(`Method ${method} Not Allowed`);
   }
-  req.body.message = message.trim();
-  const result = await createMessage(req.body);
-  res.status(httpStatus.OK).json(result);
 };
 
 export default submit;

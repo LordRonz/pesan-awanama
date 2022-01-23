@@ -25,24 +25,32 @@ export type UserSession = {
 
 export default withIronSessionApiRoute(
   async (req: NextApiRequest, res: NextApiResponse) => {
-    // get user from database then:
+    const { method } = req;
 
-    const data = await getUser(req.body);
+    switch (method) {
+      case 'POST': {
+        const data = await getUser(req.body);
 
-    if (!data || !(await compare(req.body.password, data.data.password))) {
-      return res.status(httpStatus.BAD_REQUEST).json({
-        status: httpStatus.BAD_REQUEST,
-        message: 'Name or password are invalid, who tf are u',
-      });
+        if (!data || !(await compare(req.body.password, data.data.password))) {
+          return res.status(httpStatus.BAD_REQUEST).json({
+            status: httpStatus.BAD_REQUEST,
+            message: 'Name or password are invalid, who tf are u',
+          });
+        }
+
+        req.session.user = {
+          id: data.ts,
+          name: data.data.name,
+          admin: data.data.admin,
+        };
+        await req.session.save();
+        res.send({ ok: true });
+        break;
+      }
+      default:
+        res.setHeader('Allow', ['POST']);
+        res.status(405).end(`Method ${method} Not Allowed`);
     }
-
-    req.session.user = {
-      id: data.ts,
-      name: data.data.name,
-      admin: data.data.admin,
-    };
-    await req.session.save();
-    res.send({ ok: true });
   },
   {
     cookieName: 'anjay_kue',
