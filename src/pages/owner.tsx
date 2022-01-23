@@ -2,37 +2,48 @@ import { withIronSessionSsr } from 'iron-session/next';
 import type { GetServerSideProps, NextPage } from 'next';
 import { ReactNode } from 'react';
 
+import Accent from '@/components/Accent';
+import MessageCard from '@/components/contents/MessageCard';
 import ArrowLink from '@/components/links/ArrowLink';
 import Seo from '@/components/Seo';
-
-import type { UserSession } from './api/login';
+import { getMessages } from '@/lib/fauna';
+import type { UserSession } from '@/pages/api/login';
+import type { Message } from '@/types/fauna';
 
 type OwnerPageProp = {
   user: UserSession;
+  messages: Message[];
   children?: ReactNode;
 };
 
-const Owner: NextPage<OwnerPageProp> = ({ user }) => (
-  <>
-    <Seo templateTitle='Me lord' />
-    <main>
-      <section className='bg-black text-primary-50'>
-        <div className='layout flex flex-col justify-center items-center min-h-screen text-center gap-y-40'>
-          <div className='flex flex-col gap-y-4'>
-            <h1 className='text-8xl text-primary-300'>404</h1>
-            <h2>Welcome, {user.name}</h2>
+const Owner: NextPage<OwnerPageProp> = ({ user, messages }) => {
+  return (
+    <>
+      <Seo templateTitle='Me lord' />
+      <main>
+        <section className='bg-black text-primary-50'>
+          <div className='layout flex flex-col justify-center items-center min-h-screen text-center gap-y-20'>
+            <div className='flex mt-4'>
+              <h1 className='text-primary-100'>
+                Welcome, <Accent>{user.name}</Accent>
+              </h1>
+            </div>
+            <div className='flex gap-4 grow-0 shrink flex-wrap items-center justify-evenly'>
+              {messages.map(({ message }, i) => (
+                <MessageCard key={i}>{message}</MessageCard>
+              ))}
+            </div>
+            <p className='text-xl text-primary-200 mb-4'>
+              <ArrowLink href='/' openNewTab={false} direction='left'>
+                Back To Home
+              </ArrowLink>
+            </p>
           </div>
-
-          <p className='text-xl text-primary-200'>
-            <ArrowLink href='/' openNewTab={false} direction='left'>
-              Back To Home
-            </ArrowLink>
-          </p>
-        </div>
-      </section>
-    </main>
-  </>
-);
+        </section>
+      </main>
+    </>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
   async ({ req }) => {
@@ -44,9 +55,12 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
       };
     }
 
+    const data = await getMessages();
+
     return {
       props: {
         user: req.session.user,
+        messages: data,
       },
     };
   },

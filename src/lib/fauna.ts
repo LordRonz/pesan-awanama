@@ -1,6 +1,6 @@
 import faunadb, { query as q } from 'faunadb';
 
-import { Message, User, UserRes } from '@/types/fauna';
+import { Message, MessagesRes, User, UserRes } from '@/types/fauna';
 
 const faunaClient = new faunadb.Client({
   secret: process.env.FAUNA_SECRET as string,
@@ -13,6 +13,17 @@ export const createMessage = async (body: Message) => {
   );
 
   return data;
+};
+
+export const getMessages = async () => {
+  const { data } = await faunaClient.query<MessagesRes>(
+    q.Map(
+      q.Paginate(q.Documents(q.Collection('messages'))),
+      q.Lambda((x) => q.Get(x))
+    )
+  );
+
+  return data.map((x) => x.data);
 };
 
 export const getUser = async (body: User) => {
