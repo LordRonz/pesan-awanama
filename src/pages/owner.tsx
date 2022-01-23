@@ -3,6 +3,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { ReactNode } from 'react';
 
 import Accent from '@/components/Accent';
+import MessageCard from '@/components/contents/MessageCard';
 import ArrowLink from '@/components/links/ArrowLink';
 import Seo from '@/components/Seo';
 import { getMessages } from '@/lib/fauna';
@@ -16,20 +17,23 @@ type OwnerPageProp = {
 };
 
 const Owner: NextPage<OwnerPageProp> = ({ user, messages }) => {
-  console.log(messages);
   return (
     <>
       <Seo templateTitle='Me lord' />
       <main>
         <section className='bg-black text-primary-50'>
-          <div className='layout flex flex-col justify-center items-center min-h-screen text-center gap-y-40'>
-            <div className='flex flex-col gap-y-4'>
+          <div className='layout flex flex-col justify-center items-center min-h-screen text-center gap-y-20'>
+            <div className='flex mt-4'>
               <h1 className='text-primary-100'>
                 Welcome, <Accent>{user.name}</Accent>
               </h1>
             </div>
-
-            <p className='text-xl text-primary-200'>
+            <div className='flex gap-4 grow-0 shrink flex-wrap items-center justify-evenly'>
+              {messages.map(({ message }, i) => (
+                <MessageCard key={i}>{message}</MessageCard>
+              ))}
+            </div>
+            <p className='text-xl text-primary-200 mb-4'>
               <ArrowLink href='/' openNewTab={false} direction='left'>
                 Back To Home
               </ArrowLink>
@@ -52,7 +56,6 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
     }
 
     const data = await getMessages();
-    console.log(data);
 
     return {
       props: {

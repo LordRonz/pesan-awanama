@@ -19,6 +19,7 @@ const submit = async (
     });
     return;
   }
+  req.body.message = message.trim();
   const result = await createMessage(req.body);
   res.status(httpStatus.OK).json(result);
 };
