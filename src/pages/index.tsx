@@ -1,6 +1,7 @@
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import axios from 'axios';
 import type { NextPage } from 'next';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
@@ -10,6 +11,7 @@ const toastStyle = { background: '#333', color: '#eee' };
 
 const Home: NextPage = () => {
   const [msg, setMsg] = useState<string>('');
+  const captchaRef = useRef(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
@@ -36,6 +38,10 @@ const Home: NextPage = () => {
     );
   };
 
+  const handleVerify = (captcha: string) => {
+    return captcha;
+  };
+
   return (
     <>
       <Seo />
@@ -47,6 +53,14 @@ const Home: NextPage = () => {
               No need to worry, this is completely anonymous
             </p>
             <form onSubmit={handleSubmit}>
+              <HCaptcha
+                id='test'
+                size='invisible'
+                ref={captchaRef}
+                sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY as string}
+                onVerify={handleVerify}
+                theme='dark'
+              />
               <textarea
                 className='placeholder:text-primary-100 p-2 border-2 rounded-lg border-primary-300 bg-gray-900'
                 id='msg'
