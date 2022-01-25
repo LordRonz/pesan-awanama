@@ -11,7 +11,7 @@ const toastStyle = { background: '#333', color: '#eee' };
 
 const Home: NextPage = () => {
   const [msg, setMsg] = useState<string>('');
-  const captchaRef = useRef(null);
+  const captchaRef = useRef<HCaptcha>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
@@ -21,8 +21,17 @@ const Home: NextPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    captchaRef.current?.execute();
+  };
+
+  const handleVerify = (captcha: string) => {
+    if (!captcha) {
+      return;
+    }
+
     toast.promise(
       axios.post('/api/submit', {
+        captcha,
         message: msg,
       }),
       {
@@ -36,10 +45,6 @@ const Home: NextPage = () => {
         },
       }
     );
-  };
-
-  const handleVerify = (captcha: string) => {
-    return captcha;
   };
 
   return (

@@ -30,10 +30,9 @@ const submit = async (
       }
       const verifyResponse = await axios.post(
         'https://hcaptcha.com/siteverify',
-        {
-          response: captcha,
-          secret: process.env.HCAPTCHA_SECRET_KEY as string,
-        },
+        `response=${captcha}&secret=${
+          process.env.HCAPTCHA_SECRET_KEY as string
+        }`,
         {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
