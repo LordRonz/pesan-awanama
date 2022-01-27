@@ -18,7 +18,7 @@
     "cy:headless": "cypress run"
   },
   "dependencies": {
-    "@hcaptcha/react-hcaptcha": "^1.0.0",
+    "@hcaptcha/react-hcaptcha": "^1.1.0",
     "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
     "clsx": "^1.1.1",
