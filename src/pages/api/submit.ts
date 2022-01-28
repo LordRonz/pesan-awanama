@@ -4,8 +4,8 @@ import httpStatus from 'http-status';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createMessage } from '@/lib/fauna';
-import { ErrorResponse } from '@/types/api';
-import { Message } from '@/types/fauna';
+import type { ErrorResponse } from '@/types/api';
+import type { Message } from '@/types/fauna';
 
 type ReqBody = {
   message: string;
