@@ -2,7 +2,6 @@ import axios from 'axios';
 import { withIronSessionSsr } from 'iron-session/next';
 import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import React, { ReactNode } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import Accent from '@/components/Accent';
@@ -19,7 +18,7 @@ const toastStyle = { background: '#333', color: '#eee' };
 type OwnerPageProp = {
   user: UserSession;
   messages: Message[];
-  children?: ReactNode;
+  children?: React.ReactNode;
 };
 
 const Owner: NextPage<OwnerPageProp> = ({ user, messages }) => {
