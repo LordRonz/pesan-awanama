@@ -40,8 +40,7 @@ const submit = async (
         }
       );
       if (verifyResponse.data.success) {
-        req.body.message = message.trim();
-        const result = await createMessage(req.body);
+        const result = await createMessage({ message: message.trim() });
         return res.status(httpStatus.OK).json(result);
       }
       res.status(httpStatus.UNPROCESSABLE_ENTITY).json({
