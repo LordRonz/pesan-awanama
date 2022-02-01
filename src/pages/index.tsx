@@ -5,6 +5,7 @@ import React, { useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
+import ArrowLink from '@/components/links/ArrowLink';
 import Seo from '@/components/Seo';
 
 const toastStyle = { background: '#333', color: '#eee' };
@@ -55,7 +56,10 @@ const Home: NextPage = () => {
           <div className='layout flex flex-col justify-center items-center min-h-screen text-center'>
             <h1 className='mb-4'>Tell me something, anon !</h1>
             <p className='mb-2'>
-              No need to worry, this is completely anonymous
+              No need to worry, this is completely anonymous.{' '}
+              <ArrowLink href='/images/pov.png' openNewTab>
+                My POV
+              </ArrowLink>
             </p>
             <form onSubmit={handleSubmit}>
               <HCaptcha
