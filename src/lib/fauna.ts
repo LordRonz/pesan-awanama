@@ -29,13 +29,17 @@ export const getMessages = async () => {
     )
   );
 
-  return data;
+  return data.map((datum) => {
+    datum.id = datum.ref.id;
+    return datum;
+  });
 };
 
 export const deleteMessage = async (ref: string) => {
   const data = await faunaClient.query<MessageRes>(
     q.Delete(q.Ref(q.Collection('messages'), ref))
   );
+
   return data;
 };
 

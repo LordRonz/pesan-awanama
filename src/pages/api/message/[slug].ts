@@ -3,11 +3,7 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { deleteMessage, getMessages } from '@/lib/fauna';
-
-type ReqBody = {
-  refId: string;
-};
+import { deleteMessage } from '@/lib/fauna';
 
 export default withIronSessionApiRoute(
   async (req: NextApiRequest, res: NextApiResponse) => {
@@ -17,15 +13,9 @@ export default withIronSessionApiRoute(
       return res.status(401).send({ message: 'Unauthorized' });
     }
     switch (req.method) {
-      case 'GET': {
-        const messages = await getMessages();
-
-        res.status(200).json({ messages });
-        break;
-      }
       case 'DELETE': {
-        const { refId }: ReqBody = req.body;
-        await deleteMessage(refId);
+        const { slug } = req.query;
+        await deleteMessage(slug as string);
 
         res.status(204).end();
         break;

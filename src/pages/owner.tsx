@@ -4,6 +4,8 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
 import { useQuery } from 'react-query';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 import Accent from '@/components/Accent';
 import Button from '@/components/buttons/Button';
@@ -16,6 +18,7 @@ import type { UserSession } from '@/pages/api/login';
 import type { MessageRes } from '@/types/fauna';
 
 const toastStyle = { background: '#333', color: '#eee' };
+const MeSwal = withReactContent(Swal);
 
 type OwnerPageProp = {
   user: UserSession;
@@ -44,7 +47,7 @@ const Owner: NextPage<OwnerPageProp> = ({ user }) => {
   };
 
   //#region  //*=========== Get Messages ===========
-  const { data } = useRQWithToast(
+  const { data, refetch } = useRQWithToast(
     useQuery<{ messages: MessageRes[] }, Error>('/api/message', { retry: 1 }),
     {
       loading: 'Fetching messages...',
@@ -52,6 +55,36 @@ const Owner: NextPage<OwnerPageProp> = ({ user }) => {
     }
   );
   //#endregion  //*======== Get Messages ===========
+
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    id: string
+  ) => {
+    e.preventDefault();
+    const result = await MeSwal.fire({
+      title: 'Are you sure want to delete this message?',
+      showCancelButton: true,
+      color: '#ddd',
+      confirmButtonColor: '#eb2754',
+      confirmButtonText: 'Delete it!',
+      background: '#111',
+    });
+    if (result.isConfirmed) {
+      toast.promise(axios.delete(`/api/message/${id}`), {
+        loading: 'Deleting...',
+        success: () => {
+          refetch();
+          return 'Message deleted!';
+        },
+        error: (e) => {
+          if (axios.isAxiosError(e)) {
+            return e.response?.data.message ?? e.message;
+          }
+          return 'Delete message failed';
+        },
+      });
+    }
+  };
 
   return (
     <>
@@ -66,10 +99,10 @@ const Owner: NextPage<OwnerPageProp> = ({ user }) => {
               <Button onClick={handleLogout}>Logout</Button>
             </div>
             <div className='flex gap-4 grow-0 shrink flex-wrap items-center justify-evenly'>
-              {data?.messages.map(({ data, ref }) => (
-                <MessageCard key={ref.id}>
+              {data?.messages.map(({ data, id }) => (
+                <MessageCard key={id}>
                   {data.message}
-                  <DeleteButton />
+                  <DeleteButton onClick={(e) => handleDelete(e, id)} />
                 </MessageCard>
               ))}
             </div>

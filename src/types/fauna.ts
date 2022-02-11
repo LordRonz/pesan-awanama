@@ -12,6 +12,7 @@ export type MessageRes = {
   ref: {
     id: string;
   };
+  id: string;
 };
 
 export type User = {
