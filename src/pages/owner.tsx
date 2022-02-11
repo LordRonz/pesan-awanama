@@ -3,13 +3,14 @@ import { withIronSessionSsr } from 'iron-session/next';
 import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
+import { useQuery } from 'react-query';
 
 import Accent from '@/components/Accent';
 import Button from '@/components/buttons/Button';
 import MessageCard from '@/components/contents/MessageCard';
 import ArrowLink from '@/components/links/ArrowLink';
 import Seo from '@/components/Seo';
-import { getMessages } from '@/lib/fauna';
+import useRQWithToast from '@/hooks/toast/useRQWithToast';
 import type { UserSession } from '@/pages/api/login';
 import type { Message } from '@/types/fauna';
 
@@ -17,11 +18,10 @@ const toastStyle = { background: '#333', color: '#eee' };
 
 type OwnerPageProp = {
   user: UserSession;
-  messages: Message[];
   children?: React.ReactNode;
 };
 
-const Owner: NextPage<OwnerPageProp> = ({ user, messages }) => {
+const Owner: NextPage<OwnerPageProp> = ({ user }) => {
   const router = useRouter();
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -42,6 +42,16 @@ const Owner: NextPage<OwnerPageProp> = ({ user, messages }) => {
     });
   };
 
+  //#region  //*=========== Get Messages ===========
+  const { data } = useRQWithToast(
+    useQuery<{ messages: Message[] }, Error>('/api/message', { retry: 1 }),
+    {
+      loading: 'Fetching messages...',
+      success: 'Messages fetched successfully',
+    }
+  );
+  //#endregion  //*======== Get Messages ===========
+
   return (
     <>
       <Seo templateTitle='Me lord' />
@@ -55,7 +65,7 @@ const Owner: NextPage<OwnerPageProp> = ({ user, messages }) => {
               <Button onClick={handleLogout}>Logout</Button>
             </div>
             <div className='flex gap-4 grow-0 shrink flex-wrap items-center justify-evenly'>
-              {messages.map(({ message }, i) => (
+              {data?.messages.map(({ message }, i) => (
                 <MessageCard key={i}>{message}</MessageCard>
               ))}
             </div>
@@ -92,12 +102,9 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(
       };
     }
 
-    const data = await getMessages();
-
     return {
       props: {
         user: req.session.user,
-        messages: data,
       },
     };
   },

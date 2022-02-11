@@ -2,10 +2,18 @@ export type Message = {
   message: string;
 };
 
-export type MessagesRes = {
+export type AllMessagesRes = {
   data: {
     data: Message;
   }[];
+};
+
+export type MessageRes = {
+  data: Message;
+  ts: number;
+  ref: {
+    id: string;
+  };
 };
 
 export type User = {
@@ -17,4 +25,7 @@ export type User = {
 export type UserRes = {
   data: User;
   ts: number;
+  ref: {
+    id: string;
+  };
 };
