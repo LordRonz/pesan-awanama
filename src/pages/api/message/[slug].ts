@@ -3,22 +3,25 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { getMessages } from '@/lib/fauna';
+import { deleteMessage } from '@/lib/fauna';
 
 export default withIronSessionApiRoute(
   async (req: NextApiRequest, res: NextApiResponse) => {
-    if (req.method === 'GET') {
-      const user = req.session.user;
+    const user = req.session.user;
 
-      if (!user || user?.admin !== true) {
-        return res.status(401).send({ message: 'Unauthorized' });
+    if (!user || user?.admin !== true) {
+      return res.status(401).send({ message: 'Unauthorized' });
+    }
+    switch (req.method) {
+      case 'DELETE': {
+        const { slug } = req.query;
+        await deleteMessage(slug as string);
+
+        res.status(204).end();
+        break;
       }
-
-      const messages = await getMessages();
-
-      res.status(200).json({ messages });
-    } else {
-      res.status(405).json({ message: 'Method Not Allowed' });
+      default:
+        res.status(405).json({ message: 'Method Not Allowed' });
     }
   },
   {

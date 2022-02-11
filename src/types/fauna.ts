@@ -3,9 +3,7 @@ export type Message = {
 };
 
 export type AllMessagesRes = {
-  data: {
-    data: Message;
-  }[];
+  data: MessageRes[];
 };
 
 export type MessageRes = {
@@ -14,6 +12,7 @@ export type MessageRes = {
   ref: {
     id: string;
   };
+  id: string;
 };
 
 export type User = {
