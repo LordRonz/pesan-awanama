@@ -3,9 +3,7 @@ export type Message = {
 };
 
 export type AllMessagesRes = {
-  data: {
-    data: Message;
-  }[];
+  data: MessageRes[];
 };
 
 export type MessageRes = {

@@ -7,12 +7,13 @@ import { useQuery } from 'react-query';
 
 import Accent from '@/components/Accent';
 import Button from '@/components/buttons/Button';
+import DeleteButton from '@/components/buttons/DeleteButton';
 import MessageCard from '@/components/contents/MessageCard';
 import ArrowLink from '@/components/links/ArrowLink';
 import Seo from '@/components/Seo';
 import useRQWithToast from '@/hooks/toast/useRQWithToast';
 import type { UserSession } from '@/pages/api/login';
-import type { Message } from '@/types/fauna';
+import type { MessageRes } from '@/types/fauna';
 
 const toastStyle = { background: '#333', color: '#eee' };
 
@@ -44,7 +45,7 @@ const Owner: NextPage<OwnerPageProp> = ({ user }) => {
 
   //#region  //*=========== Get Messages ===========
   const { data } = useRQWithToast(
-    useQuery<{ messages: Message[] }, Error>('/api/message', { retry: 1 }),
+    useQuery<{ messages: MessageRes[] }, Error>('/api/message', { retry: 1 }),
     {
       loading: 'Fetching messages...',
       success: 'Messages fetched successfully',
@@ -65,8 +66,11 @@ const Owner: NextPage<OwnerPageProp> = ({ user }) => {
               <Button onClick={handleLogout}>Logout</Button>
             </div>
             <div className='flex gap-4 grow-0 shrink flex-wrap items-center justify-evenly'>
-              {data?.messages.map(({ message }, i) => (
-                <MessageCard key={i}>{message}</MessageCard>
+              {data?.messages.map(({ data, ref }) => (
+                <MessageCard key={ref.id}>
+                  {data.message}
+                  <DeleteButton />
+                </MessageCard>
               ))}
             </div>
             <p className='text-xl text-primary-200 mb-4'>

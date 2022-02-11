@@ -29,7 +29,7 @@ export const getMessages = async () => {
     )
   );
 
-  return data.map((x) => x.data);
+  return data;
 };
 
 export const deleteMessage = async (ref: string) => {
