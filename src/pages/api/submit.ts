@@ -5,7 +5,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createMessage } from '@/lib/fauna';
 import type { ErrorResponse } from '@/types/api';
-import type { Message } from '@/types/fauna';
+import type { MessageRes } from '@/types/fauna';
 
 type ReqBody = {
   message: string;
@@ -14,7 +14,7 @@ type ReqBody = {
 
 const submit = async (
   req: NextApiRequest,
-  res: NextApiResponse<Message | ErrorResponse | undefined>
+  res: NextApiResponse<MessageRes | ErrorResponse | undefined>
 ) => {
   const { message, captcha }: ReqBody = req.body;
   const { method } = req;
