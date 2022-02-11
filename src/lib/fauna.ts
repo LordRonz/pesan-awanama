@@ -1,14 +1,14 @@
 import faunadb, { query as q } from 'faunadb';
 
-import type { Message, MessagesRes, User, UserRes } from '@/types/fauna';
+import type { AllMessagesRes, MessageRes, User, UserRes } from '@/types/fauna';
 
 const faunaClient = new faunadb.Client({
   secret: process.env.FAUNA_SECRET as string,
   domain: 'db.us.fauna.com',
 });
 
-export const createMessage = async (body: Message) => {
-  const data = await faunaClient.query<Message>(
+export const createMessage = async (body: MessageRes) => {
+  const data = await faunaClient.query<MessageRes>(
     q.Create(q.Collection('messages'), { data: body })
   );
 
@@ -16,7 +16,7 @@ export const createMessage = async (body: Message) => {
 };
 
 export const getMessages = async () => {
-  const { data } = await faunaClient.query<MessagesRes>(
+  const { data } = await faunaClient.query<AllMessagesRes>(
     q.Map(
       q.Paginate(q.Documents(q.Collection('messages'))),
       q.Lambda((x) => q.Get(x))
@@ -24,6 +24,13 @@ export const getMessages = async () => {
   );
 
   return data.map((x) => x.data);
+};
+
+export const deleteMessage = async (ref: string) => {
+  const data = await faunaClient.query<MessageRes>(
+    q.Delete(q.Ref(q.Collection('messages'), ref))
+  );
+  return data;
 };
 
 export const getUser = async (body: User) => {
