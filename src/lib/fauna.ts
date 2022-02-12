@@ -1,9 +1,11 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import faunadb, { query as q } from 'faunadb';
 
 import type {
-  AllMessagesRes,
+  AllMessagesResRaw,
   Message,
   MessageRes,
+  MessageResRaw,
   User,
   UserRes,
 } from '@/types/fauna';
@@ -21,8 +23,8 @@ export const createMessage = async (body: Message) => {
   return data;
 };
 
-export const getMessages = async () => {
-  const { data } = await faunaClient.query<AllMessagesRes>(
+export const getMessages = async (): Promise<MessageRes[]> => {
+  const { data } = await faunaClient.query<AllMessagesResRaw>(
     q.Map(
       q.Paginate(q.Documents(q.Collection('messages'))),
       q.Lambda((x) => q.Get(x))
@@ -30,8 +32,10 @@ export const getMessages = async () => {
   );
 
   return data.map((datum) => {
-    datum.id = datum.ref.id;
-    return datum;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ref, ...newDatum } = datum as MessageRes & MessageResRaw;
+    newDatum.id = datum.ref.id;
+    return newDatum;
   });
 };
 

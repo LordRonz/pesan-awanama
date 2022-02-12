@@ -6,13 +6,22 @@ export type AllMessagesRes = {
   data: MessageRes[];
 };
 
+export type AllMessagesResRaw = {
+  data: MessageResRaw[];
+};
+
 export type MessageRes = {
+  data: Message;
+  ts: number;
+  id: string;
+};
+
+export type MessageResRaw = {
   data: Message;
   ts: number;
   ref: {
     id: string;
   };
-  id: string;
 };
 
 export type User = {
