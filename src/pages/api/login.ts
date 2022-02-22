@@ -6,6 +6,7 @@ import { withIronSessionApiRoute } from 'iron-session/next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { getUser } from '@/lib/fauna';
+import rateLimit from '@/lib/rateLimit';
 
 declare module 'iron-session' {
   interface IronSessionData {
@@ -23,8 +24,19 @@ export type UserSession = {
   admin?: boolean;
 };
 
+const limiter = rateLimit({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 users per second
+});
+
 export default withIronSessionApiRoute(
   async (req: NextApiRequest, res: NextApiResponse) => {
+    try {
+      await limiter.check(res, 10, 'CACHE_TOKEN_LOGIN'); // 10 requests per minute
+    } catch {
+      res.status(429).json({ status: 429, message: 'Rate limit exceeded' });
+    }
+
     const { method } = req;
 
     switch (method) {
