@@ -37,9 +37,9 @@ const Owner: NextPage<OwnerPageProp> = ({ user }) => {
         setTimeout(() => router.push('/login'), 2000);
         return 'Logged out !, sayonara!';
       },
-      error: (e) => {
-        if (axios.isAxiosError(e)) {
-          return e.response?.data.message ?? e.message;
+      error: (err: Error) => {
+        if (axios.isAxiosError(err)) {
+          return err.response?.data.message ?? err.message;
         }
         return 'Logout failed, yo wtf is wrong';
       },

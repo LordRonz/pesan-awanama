@@ -32,9 +32,9 @@ const Login: NextPage = () => {
           setTimeout(() => router.push('/owner'), 2000);
           return 'Logged in !, guten morgen sir!';
         },
-        error: (e) => {
-          if (axios.isAxiosError(e)) {
-            return e.response?.data.message ?? e.message;
+        error: (err: Error) => {
+          if (axios.isAxiosError(err)) {
+            return err.response?.data.message ?? err.message;
           }
           return 'Login failed, who tf are you';
         },
