@@ -37,7 +37,7 @@
     "react-hot-toast": "^2.2.0",
     "react-icons": "^4.3.1",
     "react-query": "^3.34.16",
-    "sweetalert2": "^11.4.2",
+    "sweetalert2": "^11.4.4",
     "sweetalert2-react-content": "^4.2.0"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.3.4",
     "local-cypress": "^1.2.3",
-    "next-sitemap": "^2.4.4",
+    "next-sitemap": "^2.4.6",
     "postcss": "^8.4.6",
     "prettier": "^2.5.1",
     "standard-version": "^9.3.2",

@@ -3454,10 +3454,10 @@ neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-sitemap@^2.4.4:
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-2.4.4.tgz#5a4bc98579a2a392229ea3379db1d8cd695f7889"
-  integrity sha512-+huBDNj0BSU9gXWpBfpqeXHnAUnyNg4cEMN6K2CCmYhMGMYnsO5vaOylGJRlW9V3mqIJlTkbMV1K9dkESFamJQ==
+next-sitemap@^2.4.6:
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-2.4.6.tgz#a92cbbfafca3884867fc0158a768597ff992d160"
+  integrity sha512-xfQbpmJF96NUgIxlOitfDyRngZB24avaWIzDOSVosEpUV2SdMNsRuAm0IeSVdYpYSI1PZ6LldvT9Xnumpc016Q==
   dependencies:
     "@corex/deepmerge" "^2.6.148"
     minimist "^1.2.5"
@@ -4539,10 +4539,10 @@ sweetalert2-react-content@^4.2.0:
   resolved "https://registry.yarnpkg.com/sweetalert2-react-content/-/sweetalert2-react-content-4.2.0.tgz#ab4a6e02e37150dd0ea34d00179ec76952e3f442"
   integrity sha512-eB324swnq10UJH8nAH2S6GHuAKDgH6GpGU8vI+ulYdmlPzpb0T5QPc7O4RFNRx28GzVZUnfvtpxZbKtZ5/KOnQ==
 
-sweetalert2@^11.4.2:
-  version "11.4.2"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.2.tgz#6cafdfd72312b7d807381cc4a4b7223fec4113ce"
-  integrity sha512-Gj3X/pNYtCp3LIKxUbcdftyeuFEZR5JZn6+I1m152GQSAMsDq2eH9tL466/CDaMvYu2L+XdR0mWwaemXpQYkQw==
+sweetalert2@^11.4.4:
+  version "11.4.4"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.4.tgz#49b8db39f00a699224bb6aabcd1185b5a4fea739"
+  integrity sha512-9yYWQuRT1v9JNI/paPTSYV+68MHwe9C+HQ/I2jtfaFzoJgYRftWXOs4JqmDSjT7m2m4r8ebMMn8LcxD1Wq9B/w==
 
 tailwindcss@^3.0.23:
   version "3.0.23"
