@@ -4,6 +4,7 @@ import httpStatus from 'http-status';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createMessage } from '@/lib/fauna';
+import rateLimit from '@/lib/rateLimit';
 import type { ErrorResponse } from '@/types/api';
 import type { MessageRes } from '@/types/fauna';
 
@@ -12,10 +13,21 @@ type ReqBody = {
   captcha: string;
 };
 
+const limiter = rateLimit({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 users per second
+});
+
 const submit = async (
   req: NextApiRequest,
   res: NextApiResponse<MessageRes | ErrorResponse | undefined>
 ) => {
+  try {
+    await limiter.check(res, 10, 'CACHE_TOKEN_SUBMIT'); // 10 requests per minute
+  } catch {
+    res.status(429).json({ status: 429, message: 'Rate limit exceeded' });
+  }
+
   const { message, captcha }: ReqBody = req.body;
   const { method } = req;
   switch (method) {
