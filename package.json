@@ -41,7 +41,7 @@
     "sweetalert2-react-content": "^4.2.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.1",
+    "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@types/bcrypt": "^5.0.0",
     "@types/lru-cache": "^7.4.0",
