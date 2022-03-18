@@ -4549,10 +4549,10 @@ sweetalert2-react-content@^4.2.0:
   resolved "https://registry.yarnpkg.com/sweetalert2-react-content/-/sweetalert2-react-content-4.2.0.tgz#ab4a6e02e37150dd0ea34d00179ec76952e3f442"
   integrity sha512-eB324swnq10UJH8nAH2S6GHuAKDgH6GpGU8vI+ulYdmlPzpb0T5QPc7O4RFNRx28GzVZUnfvtpxZbKtZ5/KOnQ==
 
-sweetalert2@^11.4.4:
-  version "11.4.4"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.4.tgz#49b8db39f00a699224bb6aabcd1185b5a4fea739"
-  integrity sha512-9yYWQuRT1v9JNI/paPTSYV+68MHwe9C+HQ/I2jtfaFzoJgYRftWXOs4JqmDSjT7m2m4r8ebMMn8LcxD1Wq9B/w==
+sweetalert2@^11.4.5:
+  version "11.4.5"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.5.tgz#6383555d4e3a6c1625e51ee20e77b36108e74b00"
+  integrity sha512-m7Zh8iGJyo8dPzynnPGbCllzxMSQtFwHWoH6rZxDN9iq4wSmv0soYFI2O6XWWaXBgHfAm4YmASA3dJRq1Mpk7g==
 
 tailwindcss@^3.0.23:
   version "3.0.23"
