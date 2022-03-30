@@ -2284,10 +2284,10 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
-faunadb@^4.5.2:
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/faunadb/-/faunadb-4.5.2.tgz#b58175f2da62d7655e4c13ee0478898d174cbde2"
-  integrity sha512-XQ2yDoPZc5/IqC4eS4tP5tjewFbAK8UdQYLDGlUiJy5E9F3rpvYCMdjlkRWcaxOMD2yPYr8NSoql10zy1CNoCA==
+faunadb@^4.5.4:
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/faunadb/-/faunadb-4.5.4.tgz#9ca4a12faf21a487bfc26d9d3563ff138f2be6fe"
+  integrity sha512-v0e1aXPhitIGMtuC7NFtp//hyr0d2NtHFcGqsEJgWx49rRJoonZQl6hLQ3lBjhA/LPg26U4R/BAlmDFE2pzsUA==
   dependencies:
     base64-js "^1.2.0"
     boxen "^5.0.1"
@@ -4580,10 +4580,10 @@ sweetalert2-react-content@^4.2.0:
   resolved "https://registry.yarnpkg.com/sweetalert2-react-content/-/sweetalert2-react-content-4.2.0.tgz#ab4a6e02e37150dd0ea34d00179ec76952e3f442"
   integrity sha512-eB324swnq10UJH8nAH2S6GHuAKDgH6GpGU8vI+ulYdmlPzpb0T5QPc7O4RFNRx28GzVZUnfvtpxZbKtZ5/KOnQ==
 
-sweetalert2@^11.4.7:
-  version "11.4.7"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.7.tgz#df7a1be4659f995a7ab792e8c548280fe487d31a"
-  integrity sha512-FSCMcTAo938fq5/bhRN1pUpF9BwyWMZTxB8HdTrDilO8ZmPucRw4uppFkbBPmxjR9OllscFDF9n3GFHUCvMg8g==
+sweetalert2@^11.4.8:
+  version "11.4.8"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.8.tgz#f436eb34107c5637a0278fa7330edc722090ebbb"
+  integrity sha512-BDS/+E8RwaekGSxCPUbPnsRAyQ439gtXkTF/s98vY2l9DaVEOMjGj1FaQSorfGREKsbbxGSP7UXboibL5vgTMA==
 
 tailwindcss@^3.0.23:
   version "3.0.23"

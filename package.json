@@ -24,7 +24,7 @@
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
     "clsx": "^1.1.1",
-    "faunadb": "^4.5.2",
+    "faunadb": "^4.5.4",
     "http-status": "^1.5.0",
     "iron-session": "^6.1.1",
     "lru-cache": "^7.7.1",
@@ -37,7 +37,7 @@
     "react-hot-toast": "^2.2.0",
     "react-icons": "^4.3.1",
     "react-query": "^3.34.19",
-    "sweetalert2": "^11.4.7",
+    "sweetalert2": "^11.4.8",
     "sweetalert2-react-content": "^4.2.0"
   },
   "devDependencies": {
