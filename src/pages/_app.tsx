@@ -8,6 +8,12 @@ import { ThemeProvider } from 'next-themes';
 import nProgress from 'nprogress';
 import { QueryClient, QueryClientProvider, QueryOptions } from 'react-query';
 
+declare module 'next-themes' {
+  interface ThemeProviderProps {
+    children: React.ReactNode;
+  }
+}
+
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
 Router.events.on('routeChangeComplete', nProgress.done);
