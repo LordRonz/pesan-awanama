@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { withIronSessionSsr } from 'iron-session/next';
 import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -15,6 +15,7 @@ import ArrowLink from '@/components/links/ArrowLink';
 import Seo from '@/components/Seo';
 import useRQWithToast from '@/hooks/toast/useRQWithToast';
 import type { UserSession } from '@/pages/api/login';
+import type { ErrorResponse } from '@/types/api';
 import type { MessageRes } from '@/types/fauna';
 
 const toastStyle = { background: '#333', color: '#eee' };
@@ -37,7 +38,7 @@ const Owner: NextPage<OwnerPageProp> = ({ user }) => {
         setTimeout(() => router.push('/login'), 2000);
         return 'Logged out !, sayonara!';
       },
-      error: (err: Error) => {
+      error: (err: Error | AxiosError<ErrorResponse>) => {
         if (axios.isAxiosError(err)) {
           return err.response?.data.message ?? err.message;
         }
@@ -76,7 +77,7 @@ const Owner: NextPage<OwnerPageProp> = ({ user }) => {
           refetch();
           return 'Message deleted!';
         },
-        error: (e) => {
+        error: (e: Error | AxiosError<ErrorResponse>) => {
           if (axios.isAxiosError(e)) {
             return e.response?.data.message ?? e.message;
           }

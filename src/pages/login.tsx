@@ -1,3 +1,4 @@
+import type { AxiosError } from 'axios';
 import axios from 'axios';
 import type { NextPage } from 'next';
 import Image from 'next/image';
@@ -8,6 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import Button from '@/components/buttons/Button';
 import ArrowLink from '@/components/links/ArrowLink';
 import Seo from '@/components/Seo';
+import { ErrorResponse } from '@/types/api';
 
 import shouko from '../../public/images/nishimiya_shouko.jpg';
 
@@ -32,7 +34,7 @@ const Login: NextPage = () => {
           setTimeout(() => router.push('/owner'), 2000);
           return 'Logged in !, guten morgen sir!';
         },
-        error: (err: Error) => {
+        error: (err: Error | AxiosError<ErrorResponse>) => {
           if (axios.isAxiosError(err)) {
             return err.response?.data.message ?? err.message;
           }

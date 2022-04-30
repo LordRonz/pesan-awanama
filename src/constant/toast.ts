@@ -1,4 +1,7 @@
+import type { AxiosError } from 'axios';
 import axios from 'axios';
+
+import type { ErrorResponse } from '@/types/api';
 
 export const DEFAULT_TOAST_MESSAGE = {
   loading: 'Loading...',
@@ -6,7 +9,7 @@ export const DEFAULT_TOAST_MESSAGE = {
     return 'Logged in !, guten morgen sir!';
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  error: (e: any) => {
+  error: (e: Error | AxiosError<ErrorResponse>) => {
     if (axios.isAxiosError(e)) {
       return e.response?.data.message ?? e.message;
     }

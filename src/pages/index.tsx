@@ -1,4 +1,5 @@
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import type { AxiosError } from 'axios';
 import axios from 'axios';
 import type { NextPage } from 'next';
 import React, { useRef, useState } from 'react';
@@ -7,6 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import Button from '@/components/buttons/Button';
 import ArrowLink from '@/components/links/ArrowLink';
 import Seo from '@/components/Seo';
+import type { ErrorResponse } from '@/types/api';
 
 const toastStyle = { background: '#333', color: '#eee' };
 
@@ -38,7 +40,7 @@ const Home: NextPage = () => {
       {
         loading: 'Loading...',
         success: 'Message sent !',
-        error: (e) => {
+        error: (e: Error | AxiosError<ErrorResponse>) => {
           if (axios.isAxiosError(e)) {
             return e.response?.data.message ?? e.message;
           }
