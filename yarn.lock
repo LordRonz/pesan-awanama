@@ -4561,10 +4561,10 @@ sweetalert2-react-content@^4.2.0:
   resolved "https://registry.yarnpkg.com/sweetalert2-react-content/-/sweetalert2-react-content-4.2.0.tgz#ab4a6e02e37150dd0ea34d00179ec76952e3f442"
   integrity sha512-eB324swnq10UJH8nAH2S6GHuAKDgH6GpGU8vI+ulYdmlPzpb0T5QPc7O4RFNRx28GzVZUnfvtpxZbKtZ5/KOnQ==
 
-sweetalert2@^11.4.14:
-  version "11.4.14"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.14.tgz#b7c7efbf6672aa56696ba68d7ac141798b961525"
-  integrity sha512-Dh4XqfUSpCwhRsGM5zZFbtBRHujjcaf98DjVKXEs0ER4E/Zao0OtDHZRRQqvT9xxY7RA8WsiZ6FHJbyW+BBbDw==
+sweetalert2@^11.4.15:
+  version "11.4.15"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.15.tgz#a1682c7a016e43320d5d2f46e7f8a5a6ea1996c1"
+  integrity sha512-rj7fiN8hSMrXosoAvg13NB7OvlDS2swhL7uUGv9GcOAkr35QSQu/2Ly/93KE7eKNbYMOWtoTR00UVcgEyIoUCg==
 
 tailwind-merge@^1.2.1:
   version "1.2.1"

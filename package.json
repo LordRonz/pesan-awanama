@@ -38,7 +38,7 @@
     "react-hot-toast": "^2.2.0",
     "react-icons": "^4.3.1",
     "react-query": "^3.39.0",
-    "sweetalert2": "^11.4.14",
+    "sweetalert2": "^11.4.15",
     "sweetalert2-react-content": "^4.2.0",
     "tailwind-merge": "^1.2.1"
   },
