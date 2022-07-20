@@ -2746,11 +2746,6 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-hashlru@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/hashlru/-/hashlru-2.3.0.tgz#5dc15928b3f6961a2056416bb3a4910216fdfb51"
-  integrity sha512-0cMsjjIC8I+D3M44pOQdsy0OHXGLVz6Z0beRuufhKa0KfaD2wGwAev6jILzXsd3/vpnNQJmWyZtIILqM1N+n5A==
-
 hosted-git-info@^2.1.4:
   version "2.8.9"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
@@ -4691,12 +4686,10 @@ sweetalert2@^11.4.23:
   resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.23.tgz#a29b1d43bbfd579c1a54952da2a18a8d1a41cf0e"
   integrity sha512-BfO0gIIHu4SJiixBHpCmd74W+EkORJPX9zy5HLp6vkMAz7RsUED7BhrOBEYrYYgw9nnbxYOwzJDDVPNuK1JQtQ==
 
-tailwind-merge@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.3.0.tgz#fa29557a2e1c6947904143e45884e554f491937d"
-  integrity sha512-M+DC6DO5eypc3/iOt/oTuqUH68Ip+XCu/Afybg9/ATxUX6KMPk4UGU4z4EMx08BMOBL+iOL93+hx3Jxpb9qNGw==
-  dependencies:
-    hashlru "^2.3.0"
+tailwind-merge@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.5.0.tgz#0ce21a0ef229bc7671995ed1ec84990bee37b3fa"
+  integrity sha512-bh+3+rbGTqlxSbwBqowoQ/SOymUL+V5EDxABLmA49WvacryJDwmO8F0H0vflyE7pGf6xh344VdK11WRIjlLvUw==
 
 tailwindcss@^3.1.5:
   version "3.1.5"
