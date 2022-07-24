@@ -1618,10 +1618,10 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.9.tgz#6410af31b26bd0520933d02cbc64fce9ce3fbf0b"
   integrity sha512-rpw6JPxK6Rfg1zLOYCSwle2GFOOsnjmDYDaBwEcwoOg4qlsIVCN789VkBZDJAGi4T07gI4YSutR43t9Zz4Lzuw==
 
-cypress@^10.3.0:
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-10.3.0.tgz#fae8d32f0822fcfb938e79c7c31ef344794336ae"
-  integrity sha512-txkQWKzvBVnWdCuKs5Xc08gjpO89W2Dom2wpZgT9zWZT5jXxqPIxqP/NC1YArtkpmp3fN5HW8aDjYBizHLUFvg==
+cypress@^10.3.1:
+  version "10.3.1"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-10.3.1.tgz#7fab4ef43481c05a9a17ebe9a0ec860e15b95a19"
+  integrity sha512-As9HrExjAgpgjCnbiQCuPdw5sWKx5HUJcK2EOKziu642akwufr/GUeqL5UnCPYXTyyibvEdWT/pSC2qnGW/e5w==
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
@@ -3300,10 +3300,10 @@ loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lru-cache@*, lru-cache@^7.10.2:
-  version "7.10.2"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.10.2.tgz#aab494e0768ce94f199ef553ffe0a362f2a58bb9"
-  integrity sha512-9zDbhgmXAUvUMPV81A705K3tVzcPiZL3Bf5/5JC/FjYJlLZ5AJCeqIRFHJqyBppiLosqF+uKB7p8/RDXylqBIw==
+lru-cache@*, lru-cache@^7.13.1:
+  version "7.13.1"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.13.1.tgz#267a81fbd0881327c46a81c5922606a2cfe336c4"
+  integrity sha512-CHqbAq7NFlW3RSnoWXLJBxCWaZVBrfa9UEHId2M3AW8iEBurbqduNexEUCGc3SHc6iCYXNJCDi903LajSVAEPQ==
 
 lru-cache@^6.0.0:
   version "6.0.0"
