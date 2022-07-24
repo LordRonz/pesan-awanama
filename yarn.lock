@@ -4677,10 +4677,10 @@ sweetalert2@^11.4.23:
   resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.4.23.tgz#a29b1d43bbfd579c1a54952da2a18a8d1a41cf0e"
   integrity sha512-BfO0gIIHu4SJiixBHpCmd74W+EkORJPX9zy5HLp6vkMAz7RsUED7BhrOBEYrYYgw9nnbxYOwzJDDVPNuK1JQtQ==
 
-tailwind-merge@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.5.0.tgz#0ce21a0ef229bc7671995ed1ec84990bee37b3fa"
-  integrity sha512-bh+3+rbGTqlxSbwBqowoQ/SOymUL+V5EDxABLmA49WvacryJDwmO8F0H0vflyE7pGf6xh344VdK11WRIjlLvUw==
+tailwind-merge@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.5.1.tgz#fb7d6b724aef702b11fd01fddf1be1d8aeab3d7a"
+  integrity sha512-lqmJS6+3vsNQY77TMMRBVFbWyMcIAAD/09Vs+IXCt3cza58/O7X5DBbOu+7p6LPhw0efK45LL8kAJ7IORccMag==
 
 tailwindcss@^3.1.6:
   version "3.1.6"
